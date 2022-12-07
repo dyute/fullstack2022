@@ -40,15 +40,15 @@ const App = () => {
                     setPersons(persons.concat(returnedPerson))
                     setMessage({
                         type: "success",
-                        text: `Added '${personObject.name}'`,
+                        text: `Added ${personObject.name}`,
                     })
                     setTimeout(() => {setMessage(null)}, 5000)
                 })
                 .catch(error => {
-                    console.log('add fail')
+                    console.error(error)
                     setMessage({
                         type: "error",
-                        text: error.response.data.error,
+                        text: `Faild to add ${personObject.name}`,
                     })
                     setTimeout(() => {setMessage(null)}, 5000)
                 })
@@ -64,18 +64,18 @@ const App = () => {
                     setPersons(persons.map(person => person.id !== id ? person : returnedPerson))
                     setMessage({
                         type: "success",
-                        text: `Updated '${personObject.name}'`,
+                        text: `Updated ${personObject.name}`,
                     })
                     setTimeout(() => {setMessage(null)}, 5000)
                 })
                 .catch(error => {
-                    console.log('update fail')
+                    console.error(error)
+                    setPersons(persons.filter(person => person.id !== id))
                     setMessage({
                         type: "error",
-                        text: `Information of '${personObject.name}' has been removed from server`,
+                        text: `Information of ${personObject.name} has already been removed from server`,
                     })
                     setTimeout(() => {setMessage(null)}, 5000)
-                    setPersons(persons.filter(person => person.id !== id))
                 })
         }
     }
@@ -89,18 +89,18 @@ const App = () => {
                     setPersons(persons.filter(person => person.id !== id))
                     setMessage({
                         type: "success",
-                        text: `Deleted '${person.name}'`,
+                        text: `Deleted ${person.name}`,
                     })
                     setTimeout(() => {setMessage(null)}, 5000)
                 })
                 .catch(error => {
-                    console.log('delete fail')
+                    console.error(error)
+                    setPersons(persons.filter(person => person.id !== id))
                     setMessage({
                         type: "error",
-                        text: `Information of '${person.name}' has been removed from server`,
+                        text: `Information of ${person.name} has already been removed from server`,
                     })
                     setTimeout(() => {setMessage(null)}, 5000)
-                    setPersons(persons.filter(person => person.id !== id))
                 })
         }
     }
